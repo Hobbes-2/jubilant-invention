@@ -1,0 +1,15 @@
+[gd_scene load_steps=4 format=3 uid="uid://b2cdq6sxkme0y"]
+
+[ext_resource type="Shader" uid="uid://btihk2l405who" path="res://Shaders/pixel_art.gdshader" id="1_wo2ik"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_m7wn4"]
+shader = ExtResource("1_wo2ik")
+
+[sub_resource type="QuadMesh" id="QuadMesh_nkaq1"]
+size = Vector2(1920, 1080)
+center_offset = Vector3(960, 540, 0)
+
+[node name="PixelShader" type="MeshInstance2D"]
+texture_filter = 1
+material = SubResource("ShaderMaterial_m7wn4")
+mesh = SubResource("QuadMesh_nkaq1")

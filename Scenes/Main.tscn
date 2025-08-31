@@ -1,0 +1,64 @@
+[gd_scene load_steps=12 format=3 uid="uid://cvgtvyt2cy5su"]
+
+[ext_resource type="PackedScene" uid="uid://chm130uqryl6h" path="res://Scenes/player_controller.tscn" id="3_kln2b"]
+[ext_resource type="Texture2D" uid="uid://c2eb38owv6jdw" path="res://Textures/godot-material-concrete-1.0.1/godot-material-concrete-1.0.1/materials/concrete_hd/concrete_tex.png" id="3_pbw6q"]
+[ext_resource type="PackedScene" uid="uid://b2cdq6sxkme0y" path="res://Scenes/pixel_shader.tscn" id="4_rgh2o"]
+[ext_resource type="Texture2D" uid="uid://dr1y8rg2wukxa" path="res://Textures/godot-material-concrete-1.0.1/godot-material-concrete-1.0.1/materials/concrete_hd/concrete_spec.png" id="4_v1gob"]
+[ext_resource type="Texture2D" uid="uid://siry43nwjjyd" path="res://Textures/godot-material-concrete-1.0.1/godot-material-concrete-1.0.1/materials/concrete_hd/concrete.png" id="5_jw32o"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_glv2v"]
+sky_horizon_color = Color(0.662243, 0.671743, 0.686743, 1)
+ground_horizon_color = Color(0.662243, 0.671743, 0.686743, 1)
+
+[sub_resource type="Sky" id="Sky_uu6xs"]
+sky_material = SubResource("ProceduralSkyMaterial_glv2v")
+
+[sub_resource type="Environment" id="Environment_r0du0"]
+background_mode = 2
+sky = SubResource("Sky_uu6xs")
+tonemap_mode = 2
+glow_enabled = true
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_50glp"]
+albedo_texture = ExtResource("3_pbw6q")
+metallic = 1.0
+metallic_texture = ExtResource("4_v1gob")
+normal_enabled = true
+normal_texture = ExtResource("5_jw32o")
+
+[sub_resource type="BoxMesh" id="BoxMesh_rgh2o"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_rgh2o"]
+
+[node name="Node3D" type="Node3D"]
+transform = Transform3D(0.999871, -0.0160912, 0, 0.0160912, 0.999871, 0, 0, 0, 1, 0, 0, 0)
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_r0du0")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(-0.866023, -0.433016, 0.250001, 0, 0.499998, 0.866027, -0.500003, 0.749999, -0.43301, 0, 0, 0)
+visible = false
+shadow_enabled = true
+
+[node name="PlayerController" parent="." instance=ExtResource("3_kln2b")]
+transform = Transform3D(1, 4.65661e-08, 0, -4.65661e-08, 1, 0, 0, 0, 1, 0, 1, 48)
+
+[node name="PixelShader" parent="." instance=ExtResource("4_rgh2o")]
+z_index = -1
+
+[node name="Meshes" type="Node" parent="."]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(-6.81898e-07, 1.49012e-08, -100, 0, 10, 0, 15.6, 0, -4.37114e-06, 0.0804634, -5.00065, -71.6)
+material_override = SubResource("StandardMaterial3D_50glp")
+mesh = SubResource("BoxMesh_rgh2o")
+skeleton = NodePath("../..")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="MeshInstance3D"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="MeshInstance3D/StaticBody3D"]
+shape = SubResource("BoxShape3D_rgh2o")
+
+[node name="OmniLight3D" type="OmniLight3D" parent="."]
+transform = Transform3D(1, 1.86265e-09, 0, -1.86265e-09, 1, 0, 0, 0, 1, 0.0643647, 3.99948, 0)

@@ -1,0 +1,6 @@
+[gd_scene format=3 uid="uid://b05njwor6oqnc"]
+
+[node name="Hook" type="Area3D"]
+
+[node name="Hook Model" type="CSGSphere3D" parent="."]
+radius = 0.1

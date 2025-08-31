@@ -1,0 +1,9 @@
+[gd_scene format=3 uid="uid://k084lfp5hf4e"]
+
+[node name="Rope" type="Node3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.794188, 0)
+
+[node name="Rope Model" type="CSGCylinder3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0)
+radius = 0.05
+height = 0.5
