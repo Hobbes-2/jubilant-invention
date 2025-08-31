@@ -1,0 +1,3482 @@
+[gd_scene load_steps=11 format=3 uid="uid://c58atuvqduxyq"]
+
+[ext_resource type="Script" uid="uid://liesxu2qhbwq" path="res://Dungeon Gen/dungeon_gen.gd" id="1_8qnep"]
+[ext_resource type="PackedScene" uid="uid://chm130uqryl6h" path="res://Scenes/player_controller.tscn" id="2_hikyq"]
+[ext_resource type="MeshLibrary" uid="uid://b8g3tgb8u8os1" path="res://Dungeon Gen/new_dungeon_tiles.tres" id="2_wyxln"]
+[ext_resource type="Script" uid="uid://cxn0m7nvi75bs" path="res://Dungeon Gen/dunmesh.gd" id="3_wyxln"]
+[ext_resource type="PackedScene" uid="uid://6yv5bipqi1hu" path="res://Gridmaps/DungeonTiles/scenes/ModularDungeonTiles/walls.tscn" id="5_hoqlm"]
+[ext_resource type="Script" uid="uid://cv87bosd8rwbx" path="res://Gridmaps/DungeonTiles/scenes/ModularDungeonTiles/walls.gd" id="6_hoqlm"]
+[ext_resource type="PackedScene" uid="uid://ds3hknl0ra30c" path="res://Scenes/game_end.tscn" id="7_x6oef"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_hikyq"]
+sky_horizon_color = Color(0.662243, 0.671743, 0.686743, 1)
+ground_horizon_color = Color(0.662243, 0.671743, 0.686743, 1)
+
+[sub_resource type="Sky" id="Sky_tevbx"]
+sky_material = SubResource("ProceduralSkyMaterial_hikyq")
+
+[sub_resource type="Environment" id="Environment_hoqlm"]
+background_mode = 2
+sky = SubResource("Sky_tevbx")
+tonemap_mode = 2
+glow_enabled = true
+
+[node name="Dungeon_gen" type="Node3D"]
+script = ExtResource("1_8qnep")
+border_size = 40
+room_number = 100
+room_dist = 1
+max_room_size = 10
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(-0.866023, -0.433016, 0.250001, 0, 0.499998, 0.866027, -0.500003, 0.749999, -0.43301, 0, 0, 0)
+shadow_enabled = true
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_hoqlm")
+
+[node name="PlayerController" parent="." instance=ExtResource("2_hikyq")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 32.5, 0, 35.5)
+
+[node name="GridMap" type="GridMap" parent="."]
+visible = false
+mesh_library = ExtResource("2_wyxln")
+cell_size = Vector3(1, 2, 1)
+data = {
+"cells": PackedInt32Array(65535, 65535, 3, 65535, 40, 3, 40, 65535, 3, 0, 65535, 3, 0, 40, 3, 40, 0, 3, 65535, 0, 3, 1, 65535, 3, 1, 40, 3, 40, 1, 3, 65535, 1, 3, 2, 65535, 3, 2, 40, 3, 40, 2, 3, 65535, 2, 3, 3, 65535, 3, 3, 40, 3, 40, 3, 3, 65535, 3, 3, 4, 65535, 3, 4, 40, 3, 40, 4, 3, 65535, 4, 3, 5, 65535, 3, 5, 40, 3, 40, 5, 3, 65535, 5, 3, 6, 65535, 3, 6, 40, 3, 40, 6, 3, 65535, 6, 3, 7, 65535, 3, 7, 40, 3, 40, 7, 3, 65535, 7, 3, 8, 65535, 3, 8, 40, 3, 40, 8, 3, 65535, 8, 3, 9, 65535, 3, 9, 40, 3, 40, 9, 3, 65535, 9, 3, 10, 65535, 3, 10, 40, 3, 40, 10, 3, 65535, 10, 3, 11, 65535, 3, 11, 40, 3, 40, 11, 3, 65535, 11, 3, 12, 65535, 3, 12, 40, 3, 40, 12, 3, 65535, 12, 3, 13, 65535, 3, 13, 40, 3, 40, 13, 3, 65535, 13, 3, 14, 65535, 3, 14, 40, 3, 40, 14, 3, 65535, 14, 3, 15, 65535, 3, 15, 40, 3, 40, 15, 3, 65535, 15, 3, 16, 65535, 3, 16, 40, 3, 40, 16, 3, 65535, 16, 3, 17, 65535, 3, 17, 40, 3, 40, 17, 3, 65535, 17, 3, 18, 65535, 3, 18, 40, 3, 40, 18, 3, 65535, 18, 3, 19, 65535, 3, 19, 40, 3, 40, 19, 3, 65535, 19, 3, 20, 65535, 3, 20, 40, 3, 40, 20, 3, 65535, 20, 3, 21, 65535, 3, 21, 40, 3, 40, 21, 3, 65535, 21, 3, 22, 65535, 3, 22, 40, 3, 40, 22, 3, 65535, 22, 3, 23, 65535, 3, 23, 40, 3, 40, 23, 3, 65535, 23, 3, 24, 65535, 3, 24, 40, 3, 40, 24, 3, 65535, 24, 3, 25, 65535, 3, 25, 40, 3, 40, 25, 3, 65535, 25, 3, 26, 65535, 3, 26, 40, 3, 40, 26, 3, 65535, 26, 3, 27, 65535, 3, 27, 40, 3, 40, 27, 3, 65535, 27, 3, 28, 65535, 3, 28, 40, 3, 40, 28, 3, 65535, 28, 3, 29, 65535, 3, 29, 40, 3, 40, 29, 3, 65535, 29, 3, 30, 65535, 3, 30, 40, 3, 40, 30, 3, 65535, 30, 3, 31, 65535, 3, 31, 40, 3, 40, 31, 3, 65535, 31, 3, 32, 65535, 3, 32, 40, 3, 40, 32, 3, 65535, 32, 3, 33, 65535, 3, 33, 40, 3, 40, 33, 3, 65535, 33, 3, 34, 65535, 3, 34, 40, 3, 40, 34, 3, 65535, 34, 3, 35, 65535, 3, 35, 40, 3, 40, 35, 3, 65535, 35, 3, 36, 65535, 3, 36, 40, 3, 40, 36, 3, 65535, 36, 3, 37, 65535, 3, 37, 40, 3, 40, 37, 3, 65535, 37, 3, 38, 65535, 3, 38, 40, 3, 40, 38, 3, 65535, 38, 3, 39, 65535, 3, 39, 40, 3, 40, 39, 3, 65535, 39, 3, 40, 40, 3, 0, 30, 0, 1, 30, 0, 2, 30, 0, 3, 30, 2, 4, 30, 0, 0, 31, 0, 1, 31, 0, 2, 31, 0, 3, 31, 0, 4, 31, 0, 0, 32, 0, 1, 32, 0, 2, 32, 0, 3, 32, 0, 4, 32, 0, 0, 33, 0, 1, 33, 2, 2, 33, 0, 3, 33, 0, 4, 33, 2, 24, 5, 0, 25, 5, 0, 26, 5, 0, 27, 5, 0, 28, 5, 0, 29, 5, 0, 30, 5, 2, 24, 6, 0, 25, 6, 0, 26, 6, 0, 27, 6, 0, 28, 6, 0, 29, 6, 0, 30, 6, 0, 24, 7, 0, 25, 7, 0, 26, 7, 0, 27, 7, 0, 28, 7, 0, 29, 7, 0, 30, 7, 0, 24, 8, 0, 25, 8, 0, 26, 8, 0, 27, 8, 0, 28, 8, 0, 29, 8, 0, 30, 8, 0, 24, 9, 2, 25, 9, 0, 26, 9, 0, 27, 9, 0, 28, 9, 0, 29, 9, 0, 30, 9, 0, 24, 10, 0, 25, 10, 0, 26, 10, 0, 27, 10, 0, 28, 10, 0, 29, 10, 0, 30, 10, 0, 24, 11, 0, 25, 11, 0, 26, 11, 0, 27, 11, 0, 28, 11, 0, 29, 11, 0, 30, 11, 0, 24, 12, 0, 25, 12, 0, 26, 12, 0, 27, 12, 0, 28, 12, 0, 29, 12, 0, 30, 12, 0, 24, 13, 0, 25, 13, 0, 26, 13, 0, 27, 13, 0, 28, 13, 0, 29, 13, 0, 30, 13, 0, 7, 28, 0, 8, 28, 0, 9, 28, 0, 10, 28, 0, 11, 28, 0, 12, 28, 0, 13, 28, 2, 7, 29, 0, 8, 29, 0, 9, 29, 0, 10, 29, 0, 11, 29, 0, 12, 29, 0, 13, 29, 0, 7, 30, 0, 8, 30, 0, 9, 30, 0, 10, 30, 0, 11, 30, 0, 12, 30, 0, 13, 30, 2, 7, 31, 0, 8, 31, 0, 9, 31, 0, 10, 31, 0, 11, 31, 0, 12, 31, 0, 13, 31, 0, 7, 32, 0, 8, 32, 0, 9, 32, 0, 10, 32, 0, 11, 32, 0, 12, 32, 0, 13, 32, 2, 28, 26, 0, 29, 26, 0, 30, 26, 0, 31, 26, 0, 32, 26, 0, 33, 26, 0, 34, 26, 2, 35, 26, 0, 28, 27, 0, 29, 27, 0, 30, 27, 0, 31, 27, 0, 32, 27, 0, 33, 27, 0, 34, 27, 2, 35, 27, 0, 14, 6, 0, 15, 6, 0, 16, 6, 0, 17, 6, 0, 18, 6, 0, 14, 7, 0, 15, 7, 0, 16, 7, 0, 17, 7, 0, 18, 7, 0, 14, 8, 2, 15, 8, 0, 16, 8, 0, 17, 8, 0, 18, 8, 0, 14, 9, 0, 15, 9, 0, 16, 9, 0, 17, 9, 0, 18, 9, 2, 14, 10, 0, 15, 10, 0, 16, 10, 0, 17, 10, 0, 18, 10, 0, 14, 11, 0, 15, 11, 0, 16, 11, 0, 17, 11, 0, 18, 11, 0, 14, 12, 0, 15, 12, 0, 16, 12, 0, 17, 12, 0, 18, 12, 0, 16, 1, 0, 17, 1, 0, 18, 1, 0, 19, 1, 0, 20, 1, 0, 21, 1, 0, 22, 1, 0, 23, 1, 0, 24, 1, 0, 16, 2, 2, 17, 2, 0, 18, 2, 0, 19, 2, 0, 20, 2, 0, 21, 2, 0, 22, 2, 2, 23, 2, 0, 24, 2, 0, 14, 17, 0, 15, 17, 0, 16, 17, 0, 14, 18, 0, 15, 18, 0, 16, 18, 0, 14, 19, 2, 15, 19, 0, 16, 19, 0, 14, 20, 0, 15, 20, 0, 16, 20, 0, 14, 21, 0, 15, 21, 0, 16, 21, 0, 14, 22, 0, 15, 22, 0, 16, 22, 0, 14, 23, 0, 15, 23, 0, 16, 23, 2, 14, 24, 2, 15, 24, 0, 16, 24, 0, 31, 22, 2, 32, 22, 0, 33, 22, 0, 34, 22, 2, 35, 22, 0, 36, 22, 2, 31, 23, 0, 32, 23, 2, 33, 23, 0, 34, 23, 0, 35, 23, 0, 36, 23, 0, 3, 18, 0, 4, 18, 2, 5, 18, 0, 3, 19, 0, 4, 19, 2, 5, 19, 2, 31, 34, 0, 32, 34, 0, 33, 34, 0, 34, 34, 2, 35, 34, 0, 36, 34, 0, 31, 35, 2, 32, 35, 0, 33, 35, 0, 34, 35, 0, 35, 35, 0, 36, 35, 0, 31, 36, 2, 32, 36, 0, 33, 36, 0, 34, 36, 0, 35, 36, 0, 36, 36, 0, 20, 27, 2, 21, 27, 0, 22, 27, 0, 23, 27, 0, 24, 27, 0, 25, 27, 0, 20, 28, 0, 21, 28, 0, 22, 28, 0, 23, 28, 0, 24, 28, 0, 25, 28, 0, 20, 29, 0, 21, 29, 0, 22, 29, 0, 23, 29, 0, 24, 29, 0, 25, 29, 0, 20, 30, 2, 21, 30, 0, 22, 30, 0, 23, 30, 0, 24, 30, 0, 25, 30, 0, 20, 31, 0, 21, 31, 0, 22, 31, 0, 23, 31, 2, 24, 31, 0, 25, 31, 2, 6, 36, 2, 7, 36, 0, 8, 36, 0, 6, 37, 0, 7, 37, 0, 8, 37, 0, 6, 38, 0, 7, 38, 0, 8, 38, 0, 6, 39, 2, 7, 39, 0, 8, 39, 0, 1, 6, 0, 2, 6, 0, 3, 6, 0, 4, 6, 0, 5, 6, 0, 6, 6, 0, 7, 6, 2, 8, 6, 0, 1, 7, 0, 2, 7, 0, 3, 7, 0, 4, 7, 0, 5, 7, 0, 6, 7, 0, 7, 7, 0, 8, 7, 0, 1, 8, 0, 2, 8, 0, 3, 8, 0, 4, 8, 0, 5, 8, 0, 6, 8, 0, 7, 8, 0, 8, 8, 0, 1, 9, 0, 2, 9, 0, 3, 9, 0, 4, 9, 0, 5, 9, 0, 6, 9, 0, 7, 9, 0, 8, 9, 0, 1, 10, 0, 2, 10, 0, 3, 10, 0, 4, 10, 0, 5, 10, 0, 6, 10, 0, 7, 10, 0, 8, 10, 0, 1, 11, 0, 2, 11, 0, 3, 11, 0, 4, 11, 2, 5, 11, 0, 6, 11, 0, 7, 11, 0, 8, 11, 0, 1, 14, 0, 2, 14, 0, 3, 14, 0, 4, 14, 0, 5, 14, 2, 6, 14, 2, 1, 15, 2, 2, 15, 0, 3, 15, 2, 4, 15, 2, 5, 15, 0, 6, 15, 0, 12, 34, 2, 13, 34, 0, 14, 34, 0, 15, 34, 0, 16, 34, 0, 17, 34, 0, 18, 34, 2, 19, 34, 0, 12, 35, 0, 13, 35, 0, 14, 35, 0, 15, 35, 0, 16, 35, 0, 17, 35, 0, 18, 35, 0, 19, 35, 0, 12, 36, 0, 13, 36, 0, 14, 36, 0, 15, 36, 0, 16, 36, 0, 17, 36, 0, 18, 36, 0, 19, 36, 0, 12, 37, 0, 13, 37, 0, 14, 37, 0, 15, 37, 0, 16, 37, 0, 17, 37, 0, 18, 37, 0, 19, 37, 0, 11, 6, 2, 12, 6, 2, 11, 7, 0, 12, 7, 0, 11, 8, 0, 12, 8, 0, 11, 9, 2, 12, 9, 2, 38, 24, 0, 39, 24, 0, 38, 25, 0, 39, 25, 0, 38, 26, 0, 39, 26, 0, 38, 27, 0, 39, 27, 0, 38, 28, 0, 39, 28, 0, 38, 29, 0, 39, 29, 0, 38, 30, 0, 39, 30, 0, 38, 31, 2, 39, 31, 0, 32, 9, 0, 33, 9, 0, 34, 9, 0, 35, 9, 0, 36, 9, 0, 32, 10, 0, 33, 10, 0, 34, 10, 0, 35, 10, 0, 36, 10, 0, 32, 11, 0, 33, 11, 0, 34, 11, 0, 35, 11, 0, 36, 11, 0, 32, 12, 0, 33, 12, 0, 34, 12, 0, 35, 12, 0, 36, 12, 0, 32, 13, 0, 33, 13, 0, 34, 13, 0, 35, 13, 0, 36, 13, 0, 32, 14, 0, 33, 14, 0, 34, 14, 0, 35, 14, 0, 36, 14, 0, 32, 15, 0, 33, 15, 0, 34, 15, 0, 35, 15, 0, 36, 15, 0, 32, 16, 0, 33, 16, 0, 34, 16, 0, 35, 16, 0, 36, 16, 0, 32, 17, 0, 33, 17, 0, 34, 17, 2, 35, 17, 0, 36, 17, 2, 22, 16, 0, 23, 16, 0, 22, 17, 0, 23, 17, 2, 22, 18, 0, 23, 18, 0, 22, 19, 0, 23, 19, 0, 22, 20, 0, 23, 20, 0, 22, 21, 0, 23, 21, 0, 22, 22, 2, 23, 22, 0, 28, 17, 2, 29, 17, 0, 28, 18, 0, 29, 18, 0, 28, 19, 0, 29, 19, 0, 28, 20, 0, 29, 20, 0, 28, 21, 0, 29, 21, 0, 28, 22, 0, 29, 22, 0, 28, 23, 0, 29, 23, 2, 2, 22, 0, 3, 22, 0, 4, 22, 2, 5, 22, 0, 2, 23, 0, 3, 23, 2, 4, 23, 0, 5, 23, 0, 35, 2, 2, 36, 2, 0, 37, 2, 0, 35, 3, 0, 36, 3, 0, 37, 3, 0, 35, 4, 0, 36, 4, 0, 37, 4, 0, 35, 5, 0, 36, 5, 0, 37, 5, 0, 9, 15, 0, 10, 15, 0, 9, 16, 0, 10, 16, 0, 9, 17, 0, 10, 17, 0, 9, 18, 0, 10, 18, 0, 9, 19, 2, 10, 19, 0, 9, 20, 0, 10, 20, 0, 9, 21, 0, 10, 21, 2, 9, 22, 0, 10, 22, 0, 25, 33, 2, 26, 33, 0, 27, 33, 0, 25, 34, 0, 26, 34, 0, 27, 34, 0, 25, 35, 0, 26, 35, 0, 27, 35, 2, 25, 36, 2, 26, 36, 0, 27, 36, 0, 19, 20, 0, 20, 20, 2, 19, 21, 2, 20, 21, 0, 19, 22, 0, 20, 22, 0, 19, 23, 0, 20, 23, 0, 19, 24, 0, 20, 24, 0, 19, 25, 0, 20, 25, 2, 22, 36, 0, 23, 36, 2, 22, 37, 0, 23, 37, 0, 22, 38, 0, 23, 38, 0, 17, 29, 0, 18, 29, 2, 17, 30, 2, 18, 30, 0, 3, 1, 0, 4, 1, 0, 5, 1, 0, 6, 1, 0, 7, 1, 0, 8, 1, 0, 9, 1, 0, 10, 1, 0, 11, 1, 0, 3, 2, 0, 4, 2, 0, 5, 2, 0, 6, 2, 0, 7, 2, 0, 8, 2, 0, 9, 2, 0, 10, 2, 0, 11, 2, 0, 3, 3, 0, 4, 3, 0, 5, 3, 0, 6, 3, 0, 7, 3, 0, 8, 3, 0, 9, 3, 0, 10, 3, 0, 11, 3, 0, 3, 4, 0, 4, 4, 0, 5, 4, 2, 6, 4, 0, 7, 4, 0, 8, 4, 0, 9, 4, 0, 10, 4, 0, 11, 4, 2, 32, 31, 2, 33, 31, 0, 34, 31, 0, 35, 31, 0, 36, 31, 2, 32, 32, 0, 33, 32, 0, 34, 32, 2, 35, 32, 0, 36, 32, 0, 0, 25, 0, 1, 25, 0, 2, 25, 0, 3, 25, 0, 4, 25, 2, 5, 25, 0, 0, 26, 0, 1, 26, 0, 2, 26, 0, 3, 26, 0, 4, 26, 0, 5, 26, 0, 0, 27, 0, 1, 27, 0, 2, 27, 2, 3, 27, 0, 4, 27, 0, 5, 27, 0, 25, 16, 2, 26, 16, 0, 25, 17, 0, 26, 17, 0, 25, 18, 2, 26, 18, 2, 38, 15, 2, 39, 15, 0, 38, 16, 0, 39, 16, 0, 38, 17, 0, 39, 17, 0, 38, 18, 0, 39, 18, 0, 38, 19, 0, 39, 19, 0, 38, 20, 0, 39, 20, 0, 38, 21, 2, 39, 21, 0, 28, 0, 0, 29, 0, 0, 30, 0, 0, 31, 0, 0, 32, 0, 0, 33, 0, 0, 28, 1, 0, 29, 1, 0, 30, 1, 0, 31, 1, 0, 32, 1, 0, 33, 1, 0, 28, 2, 2, 29, 2, 0, 30, 2, 0, 31, 2, 0, 32, 2, 0, 33, 2, 2, 0, 38, 0, 1, 38, 2, 0, 39, 0, 1, 39, 0, 21, 7, 2, 22, 7, 0, 21, 8, 0, 22, 8, 0, 21, 9, 2, 22, 9, 2, 21, 10, 0, 22, 10, 2, 13, 8, 1, 13, 9, 1, 19, 9, 1, 20, 9, 1, 37, 17, 1, 37, 16, 1, 37, 15, 1, 3, 24, 1, 4, 24, 1, 5, 39, 1, 5, 38, 1, 4, 38, 1, 3, 38, 1, 2, 38, 1, 18, 33, 1, 18, 32, 1, 18, 31, 1, 17, 31, 1, 13, 33, 1, 12, 33, 1, 13, 27, 1, 13, 26, 1, 13, 25, 1, 13, 24, 1, 14, 30, 1, 15, 30, 1, 16, 30, 1, 6, 19, 1, 7, 19, 1, 8, 19, 1, 4, 17, 1, 4, 16, 1, 4, 20, 1, 4, 21, 1, 16, 3, 1, 16, 4, 1, 16, 5, 1, 15, 5, 1, 14, 5, 1, 13, 5, 1, 13, 6, 1, 22, 3, 1, 22, 4, 1, 22, 5, 1, 22, 6, 1, 21, 6, 1, 24, 36, 1, 1, 34, 1, 1, 35, 1, 1, 36, 1, 1, 37, 1, 3, 29, 1, 3, 28, 1, 2, 28, 1, 5, 33, 1, 6, 33, 1, 6, 34, 1, 6, 35, 1, 34, 25, 1, 34, 24, 1, 33, 24, 1, 32, 24, 1, 34, 28, 1, 34, 29, 1, 34, 30, 1, 33, 30, 1, 32, 30, 1, 13, 19, 1, 13, 20, 1, 13, 21, 1, 12, 21, 1, 11, 21, 1, 17, 23, 1, 17, 22, 1, 17, 21, 1, 18, 21, 1, 34, 33, 1, 30, 36, 1, 29, 36, 1, 28, 36, 1, 28, 37, 1, 27, 37, 1, 26, 37, 1, 25, 37, 1, 30, 35, 1, 29, 35, 1, 28, 35, 1, 4, 12, 1, 5, 12, 1, 5, 13, 1, 7, 5, 1, 6, 5, 1, 5, 5, 1, 11, 5, 1, 37, 31, 1, 24, 17, 1, 24, 18, 1, 21, 22, 1, 21, 21, 1, 21, 20, 1, 6, 13, 1, 6, 12, 1, 7, 12, 1, 8, 12, 1, 9, 12, 1, 9, 11, 1, 9, 10, 1, 9, 9, 1, 10, 9, 1, 1, 16, 1, 1, 17, 1, 1, 18, 1, 1, 19, 1, 1, 20, 1, 1, 21, 1, 1, 22, 1, 1, 23, 1, 1, 24, 1, 2, 24, 1, 5, 24, 1, 6, 24, 1, 6, 25, 1, 6, 26, 1, 6, 27, 1, 6, 28, 1, 6, 29, 1, 6, 30, 1, 6, 31, 1, 6, 32, 1, 5, 36, 1, 5, 37, 1, 5, 21, 1, 6, 21, 1, 6, 22, 1, 6, 23, 1, 20, 26, 1, 23, 32, 1, 23, 33, 1, 23, 34, 1, 23, 35, 1, 25, 32, 1, 19, 30, 1, 19, 29, 1, 34, 2, 1, 34, 21, 1, 34, 20, 1, 34, 19, 1, 34, 18, 1, 36, 21, 1, 37, 21, 1, 30, 22, 1, 30, 23, 1, 25, 15, 1, 25, 14, 1, 24, 14, 1, 23, 14, 1, 23, 13, 1, 23, 12, 1, 23, 11, 1, 23, 10, 1, 27, 17, 1, 27, 18, 1, 30, 4, 1, 30, 3, 1, 29, 3, 1, 28, 3, 1, 23, 9, 1)
+}
+
+[node name="Dunmesh" type="Node3D" parent="."]
+script = ExtResource("3_wyxln")
+grid_map_path = NodePath("../GridMap")
+
+[node name="Walls" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10.5, 0, 11.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@47324" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 11.5, 0, 11.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@47325" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12.5, 0, 11.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@47326" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 13.5, 0, 11.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@47327" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14.5, 0, 11.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@47328" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 15.5, 0, 11.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@47329" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10.5, 0, 12.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@47330" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 11.5, 0, 12.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@47331" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12.5, 0, 12.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@47332" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 13.5, 0, 12.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@47333" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14.5, 0, 12.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@47334" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 15.5, 0, 12.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@47335" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10.5, 0, 13.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@47336" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 11.5, 0, 13.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@47337" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12.5, 0, 13.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@47338" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 13.5, 0, 13.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@47339" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14.5, 0, 13.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@47340" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 15.5, 0, 13.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@47341" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.5, 0, 26.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@47342" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.5, 0, 26.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@47343" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.5, 0, 26.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@47344" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.5, 0, 26.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@47345" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.5, 0, 26.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@47346" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.5, 0, 26.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@47347" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.5, 0, 27.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@47348" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.5, 0, 27.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@47349" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.5, 0, 27.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@47350" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.5, 0, 27.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@47351" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.5, 0, 27.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@47352" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.5, 0, 27.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@47353" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.5, 0, 28.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@47354" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.5, 0, 28.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@47355" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.5, 0, 28.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@47356" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.5, 0, 28.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@47357" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.5, 0, 28.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@47358" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.5, 0, 28.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@47359" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.5, 0, 29.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@47360" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.5, 0, 29.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@47361" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.5, 0, 29.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@47362" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.5, 0, 29.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@47363" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.5, 0, 29.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@47364" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.5, 0, 29.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@47365" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.5, 0, 30.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@47366" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.5, 0, 30.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@47367" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.5, 0, 30.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@47368" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.5, 0, 30.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@47369" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.5, 0, 30.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@47370" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.5, 0, 30.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@47371" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.5, 0, 31.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@47372" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.5, 0, 31.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@47373" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.5, 0, 31.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@47374" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.5, 0, 31.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@47375" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.5, 0, 31.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@47376" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.5, 0, 31.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@47377" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.5, 0, 32.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@47378" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.5, 0, 32.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@47379" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.5, 0, 32.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@47380" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.5, 0, 32.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@47381" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.5, 0, 32.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@47382" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.5, 0, 32.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@47383" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.5, 0, 33.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@47384" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.5, 0, 33.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@47385" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.5, 0, 33.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@47386" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.5, 0, 33.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@47387" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.5, 0, 33.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@47388" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.5, 0, 33.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@47389" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.5, 0, 34.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@47390" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.5, 0, 34.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@47391" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.5, 0, 34.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@47392" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.5, 0, 34.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@47393" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.5, 0, 34.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@47394" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.5, 0, 34.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@47395" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 25.5, 0, 27.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@47396" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 26.5, 0, 27.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@47397" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 27.5, 0, 27.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@47398" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 28.5, 0, 27.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@47399" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 29.5, 0, 27.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@47400" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 30.5, 0, 27.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@47401" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 25.5, 0, 28.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@47402" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 26.5, 0, 28.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@47403" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 27.5, 0, 28.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@47404" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 28.5, 0, 28.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@47405" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 29.5, 0, 28.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@47406" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 30.5, 0, 28.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@47407" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 25.5, 0, 29.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@47408" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 26.5, 0, 29.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@47409" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 27.5, 0, 29.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@47410" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 28.5, 0, 29.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@47411" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 29.5, 0, 29.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@47412" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 30.5, 0, 29.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@47413" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 25.5, 0, 30.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@47414" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 26.5, 0, 30.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@47415" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 27.5, 0, 30.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@47416" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 28.5, 0, 30.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@47417" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 29.5, 0, 30.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@47418" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 30.5, 0, 30.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@47419" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 25.5, 0, 31.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@47420" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 26.5, 0, 31.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@47421" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 27.5, 0, 31.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@47422" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 28.5, 0, 31.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@47423" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 29.5, 0, 31.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@47424" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 30.5, 0, 31.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@47425" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 25.5, 0, 32.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@47426" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 26.5, 0, 32.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@47427" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 27.5, 0, 32.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@47428" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 28.5, 0, 32.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@47429" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 29.5, 0, 32.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@47430" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 30.5, 0, 32.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@47431" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 25.5, 0, 33.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@47432" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 26.5, 0, 33.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@47433" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 27.5, 0, 33.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@47434" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 28.5, 0, 33.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@47435" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 29.5, 0, 33.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@47436" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 30.5, 0, 33.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@47437" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 35.5, 0, 22.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@47438" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 36.5, 0, 22.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@47439" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 35.5, 0, 23.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@47440" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 36.5, 0, 23.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@47441" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 35.5, 0, 24.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@47442" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 36.5, 0, 24.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@47443" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 35.5, 0, 25.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@47444" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 36.5, 0, 25.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@47445" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 35.5, 0, 26.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@47446" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 36.5, 0, 26.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@47447" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 35.5, 0, 27.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@47448" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 36.5, 0, 27.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@47449" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 25.5, 0, 15.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@47450" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 26.5, 0, 15.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@47451" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 27.5, 0, 15.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@47452" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 28.5, 0, 15.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@47453" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 29.5, 0, 15.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@47454" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 30.5, 0, 15.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@47455" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 25.5, 0, 16.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@47456" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 26.5, 0, 16.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@47457" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 27.5, 0, 16.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@47458" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 28.5, 0, 16.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@47459" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 29.5, 0, 16.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@47460" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 30.5, 0, 16.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@47461" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 25.5, 0, 17.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@47462" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 26.5, 0, 17.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@47463" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 27.5, 0, 17.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@47464" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 28.5, 0, 17.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@47465" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 29.5, 0, 17.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@47466" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 30.5, 0, 17.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@47467" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 25.5, 0, 18.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@47468" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 26.5, 0, 18.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@47469" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 27.5, 0, 18.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@47470" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 28.5, 0, 18.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@47471" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 29.5, 0, 18.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@47472" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 30.5, 0, 18.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@47473" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 25.5, 0, 19.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@47474" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 26.5, 0, 19.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@47475" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 27.5, 0, 19.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@47476" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 28.5, 0, 19.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@47477" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 29.5, 0, 19.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@47478" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 30.5, 0, 19.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@47479" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 25.5, 0, 20.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@47480" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 26.5, 0, 20.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@47481" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 27.5, 0, 20.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@47482" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 28.5, 0, 20.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@47483" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 29.5, 0, 20.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@47484" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 30.5, 0, 20.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@47485" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 25.5, 0, 21.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@47486" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 26.5, 0, 21.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@47487" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 27.5, 0, 21.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@47488" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 28.5, 0, 21.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@47489" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 29.5, 0, 21.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@47490" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 30.5, 0, 21.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@47491" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.5, 0, 21.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@47492" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10.5, 0, 21.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@47493" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 11.5, 0, 21.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@47494" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12.5, 0, 21.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@47495" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 13.5, 0, 21.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@47496" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14.5, 0, 21.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@47497" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.5, 0, 22.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@47498" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10.5, 0, 22.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@47499" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 11.5, 0, 22.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@47500" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12.5, 0, 22.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@47501" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 13.5, 0, 22.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@47502" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14.5, 0, 22.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@47503" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.5, 0, 23.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@47504" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10.5, 0, 23.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@47505" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 11.5, 0, 23.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@47506" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12.5, 0, 23.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@47507" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 13.5, 0, 23.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@47508" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14.5, 0, 23.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@47509" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.5, 0, 24.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@47510" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10.5, 0, 24.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@47511" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 11.5, 0, 24.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@47512" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12.5, 0, 24.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@47513" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 13.5, 0, 24.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@47514" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14.5, 0, 24.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@47515" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 24.5, 0, 6.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@47516" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 25.5, 0, 6.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@47517" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 26.5, 0, 6.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@47518" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 27.5, 0, 6.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@47519" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 28.5, 0, 6.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@47520" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 29.5, 0, 6.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@47521" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 30.5, 0, 6.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@47522" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 24.5, 0, 7.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@47523" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 25.5, 0, 7.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@47524" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 26.5, 0, 7.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@47525" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 27.5, 0, 7.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@47526" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 28.5, 0, 7.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@47527" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 29.5, 0, 7.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@47528" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 30.5, 0, 7.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@47529" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 24.5, 0, 8.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@47530" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 25.5, 0, 8.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@47531" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 26.5, 0, 8.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@47532" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 27.5, 0, 8.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@47533" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 28.5, 0, 8.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@47534" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 29.5, 0, 8.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@47535" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 30.5, 0, 8.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@47536" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 24.5, 0, 9.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@47537" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 25.5, 0, 9.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@47538" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 26.5, 0, 9.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@47539" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 27.5, 0, 9.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@47540" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 28.5, 0, 9.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@47541" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 29.5, 0, 9.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@47542" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 30.5, 0, 9.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@47543" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 24.5, 0, 10.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@47544" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 25.5, 0, 10.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@47545" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 26.5, 0, 10.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@47546" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 27.5, 0, 10.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@47547" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 28.5, 0, 10.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@47548" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 29.5, 0, 10.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@47549" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 30.5, 0, 10.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@47550" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 24.5, 0, 11.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@47551" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 25.5, 0, 11.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@47552" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 26.5, 0, 11.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@47553" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 27.5, 0, 11.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@47554" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 28.5, 0, 11.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@47555" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 29.5, 0, 11.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@47556" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 30.5, 0, 11.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@47557" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 24.5, 0, 12.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@47558" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 25.5, 0, 12.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@47559" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 26.5, 0, 12.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@47560" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 27.5, 0, 12.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@47561" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 28.5, 0, 12.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@47562" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 29.5, 0, 12.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@47563" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 30.5, 0, 12.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@47564" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 24.5, 0, 13.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@47565" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 25.5, 0, 13.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@47566" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 26.5, 0, 13.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@47567" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 27.5, 0, 13.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@47568" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 28.5, 0, 13.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@47569" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 29.5, 0, 13.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@47570" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 30.5, 0, 13.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@47571" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 0, 4.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@47572" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.5, 0, 4.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@47573" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.5, 0, 4.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@47574" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.5, 0, 4.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@47575" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.5, 0, 4.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@47576" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.5, 0, 4.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@47577" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.5, 0, 4.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@47578" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.5, 0, 4.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@47579" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.5, 0, 4.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@47580" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 0, 5.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@47581" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.5, 0, 5.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@47582" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.5, 0, 5.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@47583" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.5, 0, 5.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@47584" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.5, 0, 5.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@47585" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.5, 0, 5.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@47586" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.5, 0, 5.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@47587" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.5, 0, 5.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@47588" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.5, 0, 5.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@47589" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 0, 6.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@47590" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.5, 0, 6.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@47591" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.5, 0, 6.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@47592" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.5, 0, 6.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@47593" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.5, 0, 6.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@47594" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.5, 0, 6.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@47595" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.5, 0, 6.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@47596" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.5, 0, 6.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@47597" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.5, 0, 6.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@47598" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 0, 7.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@47599" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.5, 0, 7.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@47600" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.5, 0, 7.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@47601" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.5, 0, 7.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@47602" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.5, 0, 7.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@47603" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.5, 0, 7.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@47604" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.5, 0, 7.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@47605" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.5, 0, 7.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@47606" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.5, 0, 7.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@47607" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 0, 8.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@47608" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.5, 0, 8.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@47609" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.5, 0, 8.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@47610" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.5, 0, 8.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@47611" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.5, 0, 8.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@47612" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.5, 0, 8.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@47613" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.5, 0, 8.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@47614" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.5, 0, 8.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@47615" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.5, 0, 8.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@47616" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 0, 9.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@47617" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.5, 0, 9.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@47618" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.5, 0, 9.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@47619" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.5, 0, 9.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@47620" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.5, 0, 9.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@47621" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.5, 0, 9.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@47622" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.5, 0, 9.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@47623" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.5, 0, 9.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@47624" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.5, 0, 9.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@47625" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 0, 10.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@47626" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.5, 0, 10.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@47627" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.5, 0, 10.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@47628" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.5, 0, 10.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@47629" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.5, 0, 10.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@47630" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.5, 0, 10.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@47631" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.5, 0, 10.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@47632" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.5, 0, 10.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@47633" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.5, 0, 10.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@47634" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 13.5, 0, 31.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@47635" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14.5, 0, 31.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@47636" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 15.5, 0, 31.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@47637" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 16.5, 0, 31.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@47638" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 17.5, 0, 31.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@47639" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 18.5, 0, 31.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@47640" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 19.5, 0, 31.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@47641" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 20.5, 0, 31.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@47642" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 21.5, 0, 31.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@47643" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 13.5, 0, 32.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@47644" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14.5, 0, 32.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@47645" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 15.5, 0, 32.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@47646" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 16.5, 0, 32.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@47647" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 17.5, 0, 32.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@47648" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 18.5, 0, 32.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@47649" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 19.5, 0, 32.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@47650" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 20.5, 0, 32.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@47651" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 21.5, 0, 32.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@47652" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 13.5, 0, 33.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@47653" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14.5, 0, 33.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@47654" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 15.5, 0, 33.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@47655" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 16.5, 0, 33.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@47656" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 17.5, 0, 33.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@47657" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 18.5, 0, 33.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@47658" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 19.5, 0, 33.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@47659" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 20.5, 0, 33.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@47660" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 21.5, 0, 33.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@47661" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 17.5, 0, 10.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@47662" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 18.5, 0, 10.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@47663" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 19.5, 0, 10.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@47664" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 20.5, 0, 10.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@47665" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 17.5, 0, 11.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@47666" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 18.5, 0, 11.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@47667" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 19.5, 0, 11.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@47668" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 20.5, 0, 11.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@47669" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 16.5, 0, 27.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@47670" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 17.5, 0, 27.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@47671" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 18.5, 0, 27.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@47672" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 16.5, 0, 28.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@47673" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 17.5, 0, 28.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@47674" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 18.5, 0, 28.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@47675" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 17.5, 0, 0.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@47676" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 18.5, 0, 0.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@47677" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 19.5, 0, 0.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@47678" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 20.5, 0, 0.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@47679" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 21.5, 0, 0.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@47680" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 22.5, 0, 0.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@47681" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 17.5, 0, 1.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@47682" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 18.5, 0, 1.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@47683" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 19.5, 0, 1.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@47684" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 20.5, 0, 1.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@47685" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 21.5, 0, 1.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@47686" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 22.5, 0, 1.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@47687" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 17.5, 0, 2.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@47688" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 18.5, 0, 2.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@47689" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 19.5, 0, 2.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@47690" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 20.5, 0, 2.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@47691" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 21.5, 0, 2.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@47692" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 22.5, 0, 2.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@47693" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10.5, 0, 1.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@47694" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 11.5, 0, 1.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@47695" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12.5, 0, 1.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@47696" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 13.5, 0, 1.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@47697" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14.5, 0, 1.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@47698" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10.5, 0, 2.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@47699" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 11.5, 0, 2.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@47700" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12.5, 0, 2.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@47701" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 13.5, 0, 2.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@47702" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14.5, 0, 2.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@47703" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10.5, 0, 3.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@47704" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 11.5, 0, 3.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@47705" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12.5, 0, 3.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@47706" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 13.5, 0, 3.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@47707" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14.5, 0, 3.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@47708" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 24.5, 0, 24.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@47709" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 25.5, 0, 24.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@47710" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 26.5, 0, 24.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@47711" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 27.5, 0, 24.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@47712" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 28.5, 0, 24.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@47713" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 29.5, 0, 24.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@47714" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 30.5, 0, 24.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@47715" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 31.5, 0, 24.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@47716" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 24.5, 0, 25.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@47717" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 25.5, 0, 25.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@47718" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 26.5, 0, 25.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@47719" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 27.5, 0, 25.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@47720" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 28.5, 0, 25.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@47721" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 29.5, 0, 25.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@47722" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 30.5, 0, 25.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@47723" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 31.5, 0, 25.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@47724" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 33.5, 0, 15.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@47725" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 34.5, 0, 15.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@47726" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 33.5, 0, 16.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@47727" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 34.5, 0, 16.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@47728" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 33.5, 0, 17.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@47729" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 34.5, 0, 17.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@47730" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 33.5, 0, 18.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@47731" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 34.5, 0, 18.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@47732" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 33.5, 0, 19.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@47733" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 34.5, 0, 19.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@47734" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 33.5, 0, 20.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@47735" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 34.5, 0, 20.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@47736" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 32.5, 0, 11.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@47737" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 33.5, 0, 11.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@47738" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 34.5, 0, 11.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@47739" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 35.5, 0, 11.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@47740" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 36.5, 0, 11.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@47741" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 37.5, 0, 11.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@47742" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 32.5, 0, 12.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@47743" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 33.5, 0, 12.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@47744" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 34.5, 0, 12.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@47745" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 35.5, 0, 12.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@47746" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 36.5, 0, 12.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@47747" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 37.5, 0, 12.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@47748" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 32.5, 0, 13.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@47749" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 33.5, 0, 13.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@47750" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 34.5, 0, 13.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@47751" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 35.5, 0, 13.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@47752" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 36.5, 0, 13.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@47753" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 37.5, 0, 13.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@47754" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 20.5, 0, 35.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@47755" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 21.5, 0, 35.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@47756" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 20.5, 0, 36.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@47757" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 21.5, 0, 36.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@47758" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 20.5, 0, 37.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@47759" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 21.5, 0, 37.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@47760" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 20.5, 0, 38.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@47761" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 21.5, 0, 38.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@47762" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 20.5, 0, 39.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@47763" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 21.5, 0, 39.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@47764" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 18.5, 0, 19.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@47765" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 19.5, 0, 19.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@47766" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 18.5, 0, 20.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@47767" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 19.5, 0, 20.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@47768" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 18.5, 0, 21.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@47769" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 19.5, 0, 21.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@47770" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 18.5, 0, 22.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@47771" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 19.5, 0, 22.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@47772" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 35.5, 0, 8.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@47773" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 36.5, 0, 8.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@47774" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 35.5, 0, 9.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@47775" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 36.5, 0, 9.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@47776" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 29.5, 0, 36.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@47777" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 30.5, 0, 36.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@47778" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 31.5, 0, 36.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@47779" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 32.5, 0, 36.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@47780" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 29.5, 0, 37.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@47781" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 30.5, 0, 37.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@47782" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 31.5, 0, 37.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@47783" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 32.5, 0, 37.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@47784" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.5, 0, 15.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@47785" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.5, 0, 15.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@47786" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.5, 0, 15.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@47787" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.5, 0, 15.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@47788" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.5, 0, 15.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@47789" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.5, 0, 15.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@47790" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.5, 0, 16.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@47791" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.5, 0, 16.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@47792" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.5, 0, 16.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@47793" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.5, 0, 16.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@47794" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.5, 0, 16.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@47795" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.5, 0, 16.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@47796" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.5, 0, 17.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@47797" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.5, 0, 17.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@47798" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.5, 0, 17.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@47799" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.5, 0, 17.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@47800" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.5, 0, 17.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@47801" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.5, 0, 17.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@47802" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.5, 0, 18.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@47803" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.5, 0, 18.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@47804" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.5, 0, 18.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@47805" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.5, 0, 18.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@47806" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.5, 0, 18.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@47807" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.5, 0, 18.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@47808" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 0, 30.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@47809" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.5, 0, 30.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@47810" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 0, 31.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@47811" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.5, 0, 31.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@47812" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 0, 32.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@47813" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.5, 0, 32.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@47814" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 18.5, 0, 15.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@47815" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 19.5, 0, 15.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@47816" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 20.5, 0, 15.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@47817" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 18.5, 0, 16.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@47818" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 19.5, 0, 16.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@47819" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 20.5, 0, 16.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@47820" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 35.5, 0, 32.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@47821" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 36.5, 0, 32.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@47822" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 37.5, 0, 32.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@47823" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 38.5, 0, 32.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@47824" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 35.5, 0, 33.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@47825" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 36.5, 0, 33.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@47826" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 37.5, 0, 33.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@47827" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 38.5, 0, 33.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@47828" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 35.5, 0, 34.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@47829" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 36.5, 0, 34.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@47830" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 37.5, 0, 34.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@47831" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 38.5, 0, 34.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@47832" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 35.5, 0, 35.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@47833" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 36.5, 0, 35.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@47834" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 37.5, 0, 35.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@47835" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 38.5, 0, 35.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@47836" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 0, 0.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@47837" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.5, 0, 0.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@47838" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.5, 0, 0.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@47839" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.5, 0, 0.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@47840" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.5, 0, 0.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@47841" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.5, 0, 0.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@47842" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.5, 0, 0.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@47843" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.5, 0, 0.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@47844" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 0, 1.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@47845" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.5, 0, 1.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@47846" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.5, 0, 1.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@47847" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.5, 0, 1.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@47848" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.5, 0, 1.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@47849" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.5, 0, 1.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@47850" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.5, 0, 1.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@47851" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.5, 0, 1.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@47852" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 0, 2.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@47853" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.5, 0, 2.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@47854" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.5, 0, 2.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@47855" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.5, 0, 2.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@47856" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.5, 0, 2.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@47857" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.5, 0, 2.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@47858" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.5, 0, 2.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@47859" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.5, 0, 2.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@47860" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 0, 18.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@47861" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.5, 0, 18.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@47862" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 0, 19.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@47863" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.5, 0, 19.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@47864" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 0, 20.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@47865" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.5, 0, 20.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@47866" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 0, 21.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@47867" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.5, 0, 21.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@47868" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 0, 22.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@47869" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.5, 0, 22.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@47870" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 0, 23.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@47871" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.5, 0, 23.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@47872" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 0, 24.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@47873" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.5, 0, 24.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@47874" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 0, 25.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@47875" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.5, 0, 25.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@47876" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12.5, 0, 5.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@47877" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 13.5, 0, 5.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@47878" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12.5, 0, 6.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@47879" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 13.5, 0, 6.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@47880" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.5, 0, 37.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@47881" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.5, 0, 37.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@47882" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.5, 0, 37.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@47883" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.5, 0, 37.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@47884" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.5, 0, 37.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@47885" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.5, 0, 37.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@47886" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.5, 0, 37.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@47887" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.5, 0, 37.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@47888" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.5, 0, 38.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@47889" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.5, 0, 38.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@47890" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.5, 0, 38.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@47891" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.5, 0, 38.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@47892" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.5, 0, 38.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@47893" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.5, 0, 38.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@47894" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.5, 0, 38.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@47895" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.5, 0, 38.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@47896" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.5, 0, 39.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@47897" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.5, 0, 39.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@47898" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.5, 0, 39.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@47899" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.5, 0, 39.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@47900" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.5, 0, 39.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@47901" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.5, 0, 39.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@47902" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.5, 0, 39.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@47903" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.5, 0, 39.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@47904" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.5, 0, 23.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@47905" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.5, 0, 23.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@47906" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.5, 0, 24.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@47907" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.5, 0, 24.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@47908" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 34.5, 0, 2.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@47909" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 35.5, 0, 2.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@47910" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 36.5, 0, 2.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@47911" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 37.5, 0, 2.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@47912" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 38.5, 0, 2.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@47913" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 39.5, 0, 2.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@47914" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 34.5, 0, 3.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@47915" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 35.5, 0, 3.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@47916" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 36.5, 0, 3.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@47917" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 37.5, 0, 3.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@47918" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 38.5, 0, 3.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@47919" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 39.5, 0, 3.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@47920" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 34.5, 0, 4.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@47921" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 35.5, 0, 4.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@47922" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 36.5, 0, 4.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@47923" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 37.5, 0, 4.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@47924" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 38.5, 0, 4.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@47925" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 39.5, 0, 4.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@47926" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 34.5, 0, 5.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@47927" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 35.5, 0, 5.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@47928" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 36.5, 0, 5.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@47929" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 37.5, 0, 5.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@47930" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 38.5, 0, 5.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@47931" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 39.5, 0, 5.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@47932" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 25.5, 0, 2.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@47933" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 26.5, 0, 2.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@47934" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 27.5, 0, 2.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@47935" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 28.5, 0, 2.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@47936" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 29.5, 0, 2.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@47937" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 30.5, 0, 2.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@47938" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 31.5, 0, 2.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@47939" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 32.5, 0, 2.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@47940" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 25.5, 0, 3.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@47941" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 26.5, 0, 3.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@47942" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 27.5, 0, 3.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@47943" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 28.5, 0, 3.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@47944" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 29.5, 0, 3.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@47945" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 30.5, 0, 3.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@47946" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 31.5, 0, 3.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@47947" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 32.5, 0, 3.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@47948" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 32.5, 0, 32.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@47949" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 33.5, 0, 32.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@47950" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 32.5, 0, 33.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@47951" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 33.5, 0, 33.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@47952" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 32.5, 0, 34.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@47953" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 33.5, 0, 34.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@47954" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 16.5, 0, 4.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@47955" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 17.5, 0, 4.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@47956" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 18.5, 0, 4.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@47957" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 19.5, 0, 4.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@47958" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 20.5, 0, 4.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@47959" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 21.5, 0, 4.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@47960" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 16.5, 0, 5.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@47961" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 17.5, 0, 5.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@47962" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 18.5, 0, 5.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@47963" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 19.5, 0, 5.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@47964" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 20.5, 0, 5.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@47965" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 21.5, 0, 5.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@47966" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 16.5, 0, 6.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@47967" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 17.5, 0, 6.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@47968" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 18.5, 0, 6.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@47969" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 19.5, 0, 6.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@47970" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 20.5, 0, 6.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@47971" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 21.5, 0, 6.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@47972" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 21.5, 0, 19.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@47973" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 22.5, 0, 19.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@47974" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 21.5, 0, 20.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@47975" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 22.5, 0, 20.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@47976" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 21.5, 0, 21.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@47977" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 22.5, 0, 21.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@47978" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 21.5, 0, 22.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@47979" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 22.5, 0, 22.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@47980" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 21.5, 0, 23.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@47981" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 22.5, 0, 23.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@47982" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 35.5, 0, 37.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@47983" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 36.5, 0, 37.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@47984" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 35.5, 0, 38.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@47985" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 36.5, 0, 38.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@47986" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12.5, 0, 28.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@47987" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 13.5, 0, 28.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@47988" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12.5, 0, 29.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@47989" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 13.5, 0, 29.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@47990" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 13.5, 0, 36.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@47991" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14.5, 0, 36.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@47992" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 15.5, 0, 36.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@47993" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 16.5, 0, 36.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@47994" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 13.5, 0, 37.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@47995" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14.5, 0, 37.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@47996" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 15.5, 0, 37.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@47997" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 16.5, 0, 37.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@47998" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 13.5, 0, 38.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@47999" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14.5, 0, 38.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@48000" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 15.5, 0, 38.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@48001" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 16.5, 0, 38.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@48002" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 13.5, 0, 39.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@48003" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14.5, 0, 39.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@48004" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 15.5, 0, 39.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@48005" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 16.5, 0, 39.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@48006" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 11.5, 0, 16.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@48007" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12.5, 0, 16.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@48008" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 13.5, 0, 16.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@48009" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 11.5, 0, 17.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@48010" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12.5, 0, 17.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@48011" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 13.5, 0, 17.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@48012" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 11.5, 0, 18.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@48013" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12.5, 0, 18.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@48014" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 13.5, 0, 18.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@48015" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 11.5, 0, 19.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@48016" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12.5, 0, 19.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@48017" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 13.5, 0, 19.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@48018" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12.5, 0, 8.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@48019" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 13.5, 0, 8.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@48020" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12.5, 0, 9.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@48021" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 13.5, 0, 9.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@48022" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 38.5, 0, 15.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@48023" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 39.5, 0, 15.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@48024" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 38.5, 0, 16.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@48025" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 39.5, 0, 16.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@48026" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 38.5, 0, 17.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@48027" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 39.5, 0, 17.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@48028" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 38.5, 0, 18.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@48029" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 39.5, 0, 18.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@48030" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 26.5, 0, 36.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@48031" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 27.5, 0, 36.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@48032" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 26.5, 0, 37.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@48033" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 27.5, 0, 37.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@48034" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.5, 0, 31.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@48035" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.5, 0, 30.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@48036" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.5, 0, 30.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@48037" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.5, 0, 25.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@48038" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10.5, 0, 29.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@48039" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 11.5, 0, 29.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@48040" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 28.5, 0, 22.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@48041" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 28.5, 0, 23.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@48042" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 31.5, 0, 18.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@48043" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 32.5, 0, 18.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@48044" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 24.5, 0, 21.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@48045" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 24.5, 0, 20.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@48046" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 24.5, 0, 19.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@48047" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 23.5, 0, 19.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@48048" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 27.5, 0, 14.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@48049" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 28.5, 0, 14.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@48050" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 34.5, 0, 37.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@48051" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 33.5, 0, 37.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@48052" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 33.5, 0, 38.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@48053" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 32.5, 0, 38.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@48054" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 31.5, 0, 38.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@48055" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 30.5, 0, 38.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@48056" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 29.5, 0, 38.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@48057" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 28.5, 0, 37.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@48058" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 20.5, 0, 21.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@48059" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 19.5, 0, 18.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@48060" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 19.5, 0, 17.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@48061" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.5, 0, 18.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@48062" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.5, 0, 17.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@48063" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10.5, 0, 17.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@48064" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.5, 0, 18.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@48065" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 19.5, 0, 3.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@48066" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 20.5, 0, 3.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@48067" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 34.5, 0, 14.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@48068" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 35.5, 0, 17.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@48069" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 36.5, 0, 17.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@48070" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 37.5, 0, 17.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@48071" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 37.5, 0, 18.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@48072" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 31.5, 0, 33.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@48073" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 31.5, 0, 32.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@48074" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 28.5, 0, 26.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@48075" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 30.5, 0, 34.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@48076" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 30.5, 0, 35.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@48077" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 29.5, 0, 35.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@48078" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 15.5, 0, 34.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@48079" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 16.5, 0, 34.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@48080" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 16.5, 0, 35.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@48081" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 17.5, 0, 30.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@48082" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 17.5, 0, 29.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@48083" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 13.5, 0, 30.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@48084" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12.5, 0, 20.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@48085" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 13.5, 0, 25.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@48086" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 13.5, 0, 26.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@48087" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 13.5, 0, 27.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@48088" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 39.5, 0, 6.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@48089" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 39.5, 0, 7.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@48090" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 39.5, 0, 8.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@48091" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 39.5, 0, 9.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@48092" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 39.5, 0, 10.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@48093" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 39.5, 0, 11.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@48094" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 39.5, 0, 12.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@48095" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 39.5, 0, 13.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@48096" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 39.5, 0, 14.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@48097" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 38.5, 0, 14.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@48098" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 34.5, 0, 33.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@48099" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 34.5, 0, 34.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@48100" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 36.5, 0, 36.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@48101" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14.5, 0, 5.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@48102" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 15.5, 0, 5.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@48103" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 15.5, 0, 6.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@48104" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 13.5, 0, 7.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@48105" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10.5, 0, 14.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@48106" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10.5, 0, 15.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@48107" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.5, 0, 15.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@48108" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 13.5, 0, 10.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@48109" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12.5, 0, 14.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@48110" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 13.5, 0, 14.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@48111" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 13.5, 0, 15.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@48112" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 16.5, 0, 11.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@48113" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 34.5, 0, 25.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@48114" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 33.5, 0, 25.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@48115" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 32.5, 0, 25.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@48116" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 35.5, 0, 21.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@48117" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 35.5, 0, 20.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@48118" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 31.5, 0, 12.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@48119" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 31.5, 0, 11.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@48120" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 24.5, 0, 14.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@48121" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 24.5, 0, 15.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@48122" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 23.5, 0, 15.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@48123" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 22.5, 0, 15.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@48124" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 21.5, 0, 15.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@48125" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 29.5, 0, 5.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@48126" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 29.5, 0, 4.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@48127" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 28.5, 0, 4.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@48128" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 27.5, 0, 4.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@48129" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 19.5, 0, 9.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@48130" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 19.5, 0, 8.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@48131" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 19.5, 0, 7.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@48132" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 19.5, 0, 12.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@48133" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 19.5, 0, 13.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@48134" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 19.5, 0, 14.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@48135" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.5, 0, 1.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@48136" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.5, 0, 2.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@48137" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.5, 0, 2.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@48138" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 13.5, 0, 4.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@48139" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 36.5, 0, 10.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@48140" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 35.5, 0, 10.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@48141" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 38.5, 0, 13.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@48142" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 19.5, 0, 38.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@48143" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 19.5, 0, 37.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@48144" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 18.5, 0, 37.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@48145" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 17.5, 0, 37.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@48146" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 22.5, 0, 37.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@48147" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 23.5, 0, 37.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@48148" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 24.5, 0, 37.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@48149" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 25.5, 0, 37.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@48150" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 36.5, 0, 7.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@48151" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 36.5, 0, 6.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@48152" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 21.5, 0, 16.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@48153" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 21.5, 0, 17.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@48154" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 21.5, 0, 18.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@48155" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 18.5, 0, 26.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@48156" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 18.5, 0, 25.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@48157" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 19.5, 0, 25.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@48158" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 20.5, 0, 25.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@48159" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 21.5, 0, 25.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@48160" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 22.5, 0, 25.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@48161" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 23.5, 0, 25.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@48162" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 15.5, 0, 28.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@48163" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14.5, 0, 28.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@48164" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.5, 0, 24.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@48165" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.5, 0, 23.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@48166" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.5, 0, 23.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@48167" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.5, 0, 33.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@48168" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.5, 0, 34.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@48169" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.5, 0, 35.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@48170" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.5, 0, 36.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@48171" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.5, 0, 3.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@48172" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.5, 0, 11.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@48173" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.5, 0, 12.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@48174" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.5, 0, 13.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@48175" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.5, 0, 14.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@48176" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.5, 0, 15.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@48177" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.5, 0, 16.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@48178" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.5, 0, 17.5)
+script = ExtResource("6_hoqlm")
+
+[node name="@Node3D@48179" type="Node3D" parent="Dunmesh" instance=ExtResource("5_hoqlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 32.5, 0, 35.5)
+script = ExtResource("6_hoqlm")
+
+[node name="GameEnd" parent="." instance=ExtResource("7_x6oef")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 32.5, 0, 18.0416)
